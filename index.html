@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>麦田烘焙 — 用心烘焙，温暖每一天</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --cream: #FFF8F0;
+  --cream-warm: #FDF0E0;
+  --cream-deep: #F5E6D0;
+  --brown-dark: #5C3D2E;
+  --brown-mid: #8B6347;
+  --brown-light: #B8956A;
+  --brown-warm: #A0714F;
+  --peach: #E8C4A0;
+  --caramel: #D4A574;
+  --cinnamon: #C08060;
+  --rose: #E8B4B8;
+  --rose-light: #F5D5D7;
+  --sage: #B8C4A0;
+  --sage-light: #D5DEC5;
+  --white: #FFFFFF;
+  --shadow-soft: 0 4px 24px rgba(92, 61, 46, 0.08);
+  --shadow-card: 0 8px 32px rgba(92, 61, 46, 0.1);
+  --shadow-hover: 0 12px 40px rgba(92, 61, 46, 0.15);
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  background: var(--cream);
+  color: var(--brown-dark);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: background 0.4s, box-shadow 0.4s, padding 0.4s;
+}
+nav.scrolled {
+  background: rgba(255, 248, 240, 0.92);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 2px 20px rgba(92, 61, 46, 0.08);
+  padding: 0.7rem 2.5rem;
+}
+.nav-logo {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 1.6rem;
+  color: var(--brown-dark);
+  text-decoration: none;
+  letter-spacing: 2px;
+}
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--brown-mid);
+  font-size: 0.9rem; font-weight: 400;
+  position: relative; transition: color 0.3s;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+  background: var(--cinnamon); border-radius: 2px; transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--brown-dark); }
+.nav-links a:hover::after { width: 100%; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, #FFF8F0 0%, #FDF0E0 30%, #F5E6D0 60%, #E8D5BF 100%);
+}
+.hero::before {
+  content: ''; position: absolute; top: -20%; right: -10%; width: 70vw; height: 70vw;
+  background: radial-gradient(circle, rgba(212, 165, 116, 0.15) 0%, transparent 70%);
+  border-radius: 50%; animation: float 8s ease-in-out infinite;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -15%; left: -5%; width: 50vw; height: 50vw;
+  background: radial-gradient(circle, rgba(232, 180, 184, 0.12) 0%, transparent 70%);
+  border-radius: 50%; animation: float 10s ease-in-out infinite reverse;
+}
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(20px, -30px); }
+}
+
+.hero-content {
+  text-align: center; position: relative; z-index: 2;
+  padding: 2rem; max-width: 700px;
+}
+.hero-badge {
+  display: inline-block; padding: 0.4rem 1.2rem; border-radius: 30px;
+  background: rgba(184, 196, 160, 0.25); color: var(--brown-mid);
+  font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 2rem;
+  border: 1px solid rgba(184, 196, 160, 0.4);
+  animation: fadeInDown 0.8s ease-out;
+}
+.hero-title {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  color: var(--brown-dark);
+  line-height: 1.2; margin-bottom: 1rem;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+.hero-title span {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--brown-dark), var(--cinnamon));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-subtitle {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--brown-mid); font-weight: 400;
+  margin-bottom: 2.5rem; letter-spacing: 2px;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 1rem 2.5rem; border-radius: 50px;
+  background: var(--brown-dark); color: var(--cream);
+  font-size: 1rem; font-weight: 500;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+  box-shadow: 0 4px 20px rgba(92, 61, 46, 0.2);
+}
+.hero-cta:hover {
+  background: var(--brown-warm);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(92, 61, 46, 0.3);
+}
+.hero-cta svg { width: 18px; height: 18px; transition: transform 0.3s; }
+.hero-cta:hover svg { transform: translateX(4px); }
+
+/* Decorative wheat */
+.wheat-deco {
+  position: absolute; font-size: 8rem; opacity: 0.06;
+  font-family: 'Ma Shan Zheng', cursive; color: var(--brown-dark);
+  pointer-events: none; user-select: none;
+}
+.wheat-1 { top: 15%; left: 5%; transform: rotate(-15deg); }
+.wheat-2 { bottom: 20%; right: 8%; transform: rotate(20deg); font-size: 6rem; }
+.wheat-3 { top: 40%; right: 15%; transform: rotate(35deg); font-size: 4rem; }
+
+/* Scroll indicator */
+.scroll-hint {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  animation: fadeInUp 0.8s ease-out 1s both;
+}
+.scroll-hint span { font-size: 0.75rem; color: var(--brown-light); letter-spacing: 2px; }
+.scroll-line {
+  width: 1px; height: 40px; background: var(--caramel);
+  position: relative; overflow: hidden; border-radius: 1px;
+}
+.scroll-line::after {
+  content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
+  background: var(--brown-dark); animation: scrollDown 1.8s ease-in-out infinite;
+}
+@keyframes scrollDown { 0% { top: -100%; } 50% { top: 100%; } 100% { top: 100%; } }
+
+/* ===== SECTION COMMON ===== */
+section { padding: 6rem 2rem; }
+.section-header { text-align: center; margin-bottom: 4rem; }
+.section-label {
+  display: inline-block; padding: 0.3rem 1rem; border-radius: 30px;
+  background: rgba(212, 165, 116, 0.15); color: var(--brown-warm);
+  font-size: 0.78rem; letter-spacing: 3px; margin-bottom: 1rem;
+  border: 1px solid rgba(212, 165, 116, 0.3);
+}
+.section-title {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  color: var(--brown-dark); margin-bottom: 0.8rem;
+}
+.section-desc {
+  font-size: 0.95rem; color: var(--brown-mid);
+  max-width: 500px; margin: 0 auto;
+}
+
+/* ===== PRODUCTS ===== */
+.products { background: var(--cream); position: relative; }
+.products::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 120px;
+  background: linear-gradient(to bottom, var(--cream-warm), transparent);
+  pointer-events: none;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem; max-width: 1100px; margin: 0 auto;
+}
+.product-card {
+  background: var(--white); border-radius: var(--radius-md);
+  overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: var(--shadow-soft);
+  opacity: 0; transform: translateY(30px);
+}
+.product-card.visible { opacity: 1; transform: translateY(0); }
+.product-card:hover {
+  transform: translateY(-8px); box-shadow: var(--shadow-hover);
+}
+.product-img {
+  width: 100%; height: 220px; position: relative; overflow: hidden;
+}
+.product-img-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3.5rem;
+  transition: transform 0.6s;
+}
+.product-card:hover .product-img-placeholder { transform: scale(1.08); }
+.p1 { background: linear-gradient(135deg, #F5E6D0, #E8D5BF); }
+.p2 { background: linear-gradient(135deg, #F5D5D7, #EAC4C6); }
+.p3 { background: linear-gradient(135deg, #D5DEC5, #C5D4B0); }
+.p4 { background: linear-gradient(135deg, #FDF0E0, #F0DFC8); }
+.p5 { background: linear-gradient(135deg, #E8D5BF, #DCC4A5); }
+.p6 { background: linear-gradient(135deg, #F0DFC8, #E5D0B0); }
+
+.product-tag {
+  position: absolute; top: 1rem; right: 1rem;
+  padding: 0.25rem 0.8rem; border-radius: 20px;
+  background: rgba(255,255,255,0.9); font-size: 0.72rem;
+  color: var(--cinnamon); font-weight: 500;
+  backdrop-filter: blur(8px);
+}
+.product-info { padding: 1.5rem; }
+.product-name {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 1.35rem; color: var(--brown-dark);
+  margin-bottom: 0.3rem;
+}
+.product-price {
+  font-size: 1.1rem; color: var(--cinnamon);
+  font-weight: 600; margin-bottom: 0.6rem;
+}
+.product-price::before { content: '¥'; font-size: 0.85rem; }
+.product-desc {
+  font-size: 0.85rem; color: var(--brown-mid);
+  line-height: 1.6;
+}
+
+/* ===== ABOUT ===== */
+.about { background: var(--cream-warm); position: relative; }
+.about-container {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+  align-items: center;
+}
+.about-img {
+  border-radius: var(--radius-lg); overflow: hidden;
+  box-shadow: var(--shadow-card); position: relative;
+  aspect-ratio: 4/3;
+}
+.about-img-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--cream-deep), var(--peach));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 4rem;
+}
+.about-img::after {
+  content: ''; position: absolute; inset: 0;
+  border: 2px solid rgba(184, 145, 106, 0.2);
+  border-radius: var(--radius-lg);
+  pointer-events: none;
+}
+.about-text { padding: 1rem 0; }
+.about-text .section-label { margin-bottom: 1rem; }
+.about-heading {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 2.4rem; color: var(--brown-dark);
+  margin-bottom: 1.5rem; line-height: 1.3;
+}
+.about-story {
+  font-size: 0.95rem; color: var(--brown-mid);
+  margin-bottom: 1.2rem; line-height: 1.9;
+}
+.about-quote {
+  padding: 1.5rem 2rem; border-left: 3px solid var(--caramel);
+  background: rgba(255, 255, 255, 0.5); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-family: 'Noto Serif SC', serif;
+  font-style: italic; font-size: 0.95rem; color: var(--brown-warm);
+  line-height: 1.8; margin-top: 2rem;
+}
+.about-quote cite {
+  display: block; margin-top: 0.8rem;
+  font-style: normal; font-size: 0.82rem;
+  color: var(--brown-light);
+}
+
+/* ===== REVIEWS ===== */
+.reviews { background: var(--cream); }
+.reviews-grid {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+.review-card {
+  background: var(--white); border-radius: var(--radius-md);
+  padding: 2rem; box-shadow: var(--shadow-soft);
+  transition: all 0.3s; position: relative;
+}
+.review-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+.review-card::before {
+  content: '"'; position: absolute; top: 0.5rem; left: 1.5rem;
+  font-family: 'Ma Shan Zheng', cursive; font-size: 5rem;
+  color: var(--peach); line-height: 1; pointer-events: none;
+}
+.review-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.review-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; flex-shrink: 0;
+}
+.avatar-1 { background: var(--rose-light); }
+.avatar-2 { background: var(--sage-light); }
+.avatar-3 { background: var(--cream-deep); }
+.review-user-info { flex: 1; }
+.review-name { font-weight: 500; font-size: 0.95rem; color: var(--brown-dark); }
+.review-stars { color: var(--caramel); font-size: 0.85rem; letter-spacing: 2px; }
+.review-text {
+  font-size: 0.9rem; color: var(--brown-mid);
+  line-height: 1.8; padding-top: 0.5rem;
+}
+
+/* ===== CONTACT ===== */
+.contact { background: var(--cream-warm); }
+.contact-container {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+}
+.contact-info { display: flex; flex-direction: column; gap: 1.8rem; padding: 1rem 0; }
+.contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+.contact-icon {
+  width: 48px; height: 48px; border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.7);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0;
+  border: 1px solid rgba(212, 165, 116, 0.2);
+}
+.contact-label {
+  font-size: 0.78rem; color: var(--brown-light);
+  letter-spacing: 1px; margin-bottom: 0.2rem;
+}
+.contact-value {
+  font-size: 0.95rem; color: var(--brown-dark);
+  font-weight: 500; line-height: 1.5;
+}
+.contact-map {
+  border-radius: var(--radius-md); overflow: hidden;
+  box-shadow: var(--shadow-card); aspect-ratio: 4/3;
+  background: linear-gradient(135deg, var(--cream-deep), #E0D0B8);
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 0.8rem; color: var(--brown-mid);
+}
+.map-pin { font-size: 2.5rem; }
+.map-text { font-size: 0.85rem; opacity: 0.7; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--brown-dark); color: var(--cream-warm);
+  padding: 3rem 2rem; text-align: center;
+}
+.footer-logo {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 1.8rem; color: var(--caramel);
+  margin-bottom: 0.5rem;
+}
+.footer-text { font-size: 0.82rem; opacity: 0.6; }
+.footer-social { display: flex; justify-content: center; gap: 1.2rem; margin: 1.2rem 0; }
+.footer-social a {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid rgba(255,248,240,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; text-decoration: none;
+  color: var(--cream-warm); transition: all 0.3s;
+}
+.footer-social a:hover {
+  background: rgba(255,248,240,0.1);
+  border-color: var(--caramel); color: var(--caramel);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .about-container, .contact-container { grid-template-columns: 1fr; gap: 2.5rem; }
+  .about-img { max-height: 320px; }
+  section { padding: 4rem 1.5rem; }
+}
+@media (max-width: 640px) {
+  nav { padding: 0.8rem 1.5rem; }
+  .nav-links { gap: 1.2rem; }
+  .nav-links a { font-size: 0.8rem; }
+  .products-grid { grid-template-columns: 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .wheat-deco { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">🌾 麦田烘焙</a>
+  <ul class="nav-links">
+    <li><a href="#products">招牌产品</a></li>
+    <li><a href="#about">关于我们</a></li>
+    <li><a href="#reviews">顾客好评</a></li>
+    <li><a href="#contact">联系我们</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wheat-deco wheat-1">麦</div>
+  <div class="wheat-deco wheat-2">田</div>
+  <div class="wheat-deco wheat-3">穗</div>
+  <div class="hero-content">
+    <div class="hero-badge">SINCE 2019 · 手工烘焙</div>
+    <h1 class="hero-title"><span>麦田烘焙</span></h1>
+    <p class="hero-subtitle">用心烘焙，温暖每一天</p>
+    <a href="#products" class="hero-cta">
+      查看菜单
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="section-header">
+    <div class="section-label">SIGNATURE</div>
+    <h2 class="section-title">招牌产品</h2>
+    <p class="section-desc">每一款都经过数百次调试，只为呈现最纯粹的麦香与温度</p>
+  </div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-placeholder p1">🍞</div>
+        <div class="product-tag">人气 TOP1</div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">北海道吐司</div>
+        <div class="product-price">38</div>
+        <div class="product-desc">选用优质黄油与鲜奶，72小时低温发酵，口感绵密柔软如云朵</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-placeholder p2">🥐</div>
+        <div class="product-tag">经典必尝</div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">法式可颂</div>
+        <div class="product-price">22</div>
+        <div class="product-desc">层层叠叠的酥脆，法国AOP黄油手作，每一口都是巴黎清晨</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-placeholder p3">🧁</div>
+        <div class="product-tag">每日限量</div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">抹茶红豆蛋糕</div>
+        <div class="product-price">58</div>
+        <div class="product-desc">宇治抹茶与手煮红豆的完美邂逅，清新与醇厚层层交织</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-placeholder p4">🎂</div>
+        <div class="product-tag">匠心之作</div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">焦糖巴斯克</div>
+        <div class="product-price">68</div>
+        <div class="product-desc">表面焦香内里流心，海盐焦糖与芝士的极致碰撞</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-placeholder p5">🥖</div>
+        <div class="product-tag">健康之选</div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">全麦核桃欧包</div>
+        <div class="product-price">32</div>
+        <div class="product-desc">石磨全麦粉搭配加州核桃，天然酵母慢发酵，越嚼越香</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-placeholder p6">🍩</div>
+        <div class="product-tag">周末特供</div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">肉桂苹果派</div>
+        <div class="product-price">36</div>
+        <div class="product-desc">锡兰肉桂包裹烟台红富士，酥皮之下是整个秋天的味道</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-container">
+    <div class="about-img">
+      <div class="about-img-placeholder">🏠</div>
+    </div>
+    <div class="about-text">
+      <div class="section-label">OUR STORY</div>
+      <h2 class="about-heading">从一片麦田开始的故事</h2>
+      <p class="about-story">
+        2019年的秋天，创始人小麦在一座老洋房里点亮了第一台烤箱。她相信，好的面包不需要复杂的配方，只需要对食材的尊重和对时间的耐心。
+      </p>
+      <p class="about-story">
+        五年来，麦田烘焙始终坚持手工制作，从选粉到出炉，每一道工序都亲力亲为。我们拒绝工业化流水线，只用最天然的材料、最缓慢的发酵，去守护面包最本真的味道。
+      </p>
+      <div class="about-quote">
+        做面包和做人一样，急不得。你要等面粉醒来，等酵母呼吸，等时间给出答案。
+        <cite>—— 创始人 小麦</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="section-header">
+    <div class="section-label">TESTIMONIALS</div>
+    <h2 class="section-title">他们这样说</h2>
+    <p class="section-desc">每一句鼓励，都是我们清晨四点起床的理由</p>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar avatar-1">🧑‍🍳</div>
+        <div class="review-user-info">
+          <div class="review-name">林小晴</div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+      <p class="review-text">北海道吐司是我回购过最多次的面包！撕开的瞬间就能感受到那份柔软，配一杯热牛奶就是最治愈的早餐。每次经过都忍不住带一袋回家。</p>
+    </div>
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar avatar-2">👨‍💼</div>
+        <div class="review-user-info">
+          <div class="review-name">张先生</div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+      <p class="review-text">作为一个对面包很挑剔的人，麦田的全麦欧包让我心服口服。天然酵母的麦香是工业面包永远做不到的，核桃的脆感恰到好处，配黑咖啡绝了。</p>
+    </div>
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar avatar-3">👩‍🎨</div>
+        <div class="review-user-info">
+          <div class="review-name">陈设计</div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+      <p class="review-text">焦糖巴斯克是我为朋友庆生的首选！切开的那一刻流心缓缓溢出，所有人都发出了惊叹。小店的环境也特别温馨，很有生活气息。</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-header">
+    <div class="section-label">CONTACT</div>
+    <h2 class="section-title">来找我们</h2>
+    <p class="section-desc">推开门，麦香就在那里等你</p>
+  </div>
+  <div class="contact-container">
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <div class="contact-label">营业时间</div>
+          <div class="contact-value">周一至周五 7:00 - 20:00<br>周末及节假日 8:00 - 21:00</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">门店地址</div>
+          <div class="contact-value">上海市静安区愚园路 1088 号<br>（近江苏路地铁站 2 号口）</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-label">联系电话</div>
+          <div class="contact-value">021-6288-9527</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">💌</div>
+        <div>
+          <div class="contact-label">微信 / 小红书</div>
+          <div class="contact-value">@麦田烘焙MaiTian</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-map">
+      <div class="map-pin">📍</div>
+      <div>地图加载区域</div>
+      <div class="map-text">上海市静安区愚园路 1088 号</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🌾 麦田烘焙</div>
+  <div class="footer-text">用心烘焙，温暖每一天</div>
+  <div class="footer-social">
+    <a href="#" title="微信">💬</a>
+    <a href="#" title="小红书">📕</a>
+    <a href="#" title="抖音">🎵</a>
+  </div>
+  <div class="footer-text" style="margin-top: 1rem; font-size: 0.75rem;">© 2024 麦田烘焙. All rights reserved.</div>
+</footer>
+
+<script>
+// Navbar scroll effect
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Scroll reveal for product cards
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      const card = entry.target;
+      const idx = [...card.parentElement.children].indexOf(card);
+      setTimeout(() => card.classList.add('visible'), idx * 120);
+      observer.unobserve(card);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
+</script>
+</body>
+</html>
